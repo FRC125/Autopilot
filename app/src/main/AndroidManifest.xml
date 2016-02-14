@@ -15,6 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreatePathActivity" android:parentActivityName="com.nutrons.autopilot.MainActivity"></activity>
     </application>
 
 </manifest>

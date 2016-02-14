@@ -19,7 +19,7 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:background="@drawable/oval"
-        android:id="@+id/imageButton"
+        android:id="@+id/createPathButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="25dp"

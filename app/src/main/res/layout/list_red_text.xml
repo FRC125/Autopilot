@@ -3,9 +3,8 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:textColor="#701F19"
     android:gravity="center_vertical"
-    android:paddingLeft="6dip"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    />
+    android:paddingLeft="6dip"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:textColor="#701F19" />

@@ -10,15 +10,15 @@
     tools:context="com.nutrons.autopilot.CreatePathActivity">
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Name"
-        android:id="@+id/textView2"
-        android:singleLine="true"
-        android:layout_marginTop="112dp"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView3" />
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginTop="112dp"
+        android:singleLine="true"
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/editTextName"
@@ -28,31 +28,31 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Description"
-        android:id="@+id/textView3"
-        android:layout_marginTop="61dp"
+        android:layout_alignStart="@+id/editTextDescription"
         android:layout_below="@+id/editTextName"
-        android:layout_alignStart="@+id/editTextDescription" />
+        android:layout_marginTop="61dp"
+        android:text="Description"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/editTextDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
-        android:layout_alignParentStart="true" />
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
     <Button
+        android:id="@+id/createTrajectoryButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create"
-        android:id="@+id/createTrajectoryButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="#F44336" />
+        android:backgroundTint="#F44336"
+        android:text="Create" />
 
 </RelativeLayout>

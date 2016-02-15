@@ -1,12 +1,10 @@
 package com.nutrons.autopilot;
 
 
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +31,11 @@ public class PathsFragment extends ListFragment implements AdapterView.OnItemCli
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.PathNames, android.R.layout.simple_list_item_1);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.PathNames, R.layout.list_red_text);
         setListAdapter(adapter);
         getListView().setOnItemClickListener(this);
-    }
 
+    }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getActivity(), "Placeholder for click stuff" + position, Toast.LENGTH_SHORT).show();
     }

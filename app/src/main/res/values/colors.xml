@@ -7,4 +7,5 @@
     <color name="primary_dark_material_light">#c62828</color>
     <color name="accent_material_light">#f44336</color>
     <color name="primary_text_material_light">#ffffff</color>
+    <color name="black">#000000</color>
 </resources>

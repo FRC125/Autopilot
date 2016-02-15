@@ -4,4 +4,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="PathNames">
+        <item>Path1</item>
+        <item>Path2</item>
+        <item>Path3</item>
+        <item>Path4</item>
+        <item>Path5</item>
+    </string-array>
+
 </resources>

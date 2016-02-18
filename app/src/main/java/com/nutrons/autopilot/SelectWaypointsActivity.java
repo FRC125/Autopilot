@@ -18,8 +18,8 @@ public class SelectWaypointsActivity extends AppCompatActivity {
         double maxAccel = intent.getDoubleExtra("MaxAccel",0.0);
         double maxJerk = intent.getDoubleExtra("MaxJerk",0.0);
         double maxVel = intent.getDoubleExtra("MaxVel",0.0);
-
-        System.out.println(maxAccel + " - " + maxJerk + " - " + maxVel);
+        String pathname = intent.getStringExtra("pathName");
+        String pathDescription = intent.getStringExtra("pathDescription");
     }
 
     @Override

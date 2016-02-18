@@ -25,14 +25,20 @@ public class CreatePathActivity extends AppCompatActivity {
         EditText editMaxAccel = (EditText) findViewById(R.id.editMaxAccel);
         EditText editMaxJerk = (EditText) findViewById(R.id.editMaxJerk);
         EditText editMaxVel = (EditText) findViewById(R.id.editMaxVel);
+        EditText editPathName = (EditText) findViewById(R.id.editPathName);
+        EditText editPathDescription = (EditText) findViewById(R.id.editTextDescription);
 
         double maxAccel = Double.parseDouble(editMaxAccel.getText().toString());
         double maxJerk = Double.parseDouble(editMaxJerk.getText().toString());
         double maxVel = Double.parseDouble(editMaxVel.getText().toString());
+        String pathName = editPathName.getText().toString();
+        String pathDescription = editPathDescription.getText().toString();
 
         intent.putExtra("MaxAccel", maxAccel);
         intent.putExtra("MaxJerk", maxJerk);
         intent.putExtra("MaxVel", maxVel);
+        intent.putExtra("pathName", pathName);
+        intent.putExtra("pathDescription", pathDescription);
 
         startActivity(intent);
     }

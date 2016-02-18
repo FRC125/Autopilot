@@ -10,29 +10,29 @@
     tools:context="com.nutrons.autopilot.CreatePathActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewGiveName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="45dp"
         android:singleLine="true"
         android:text="Name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/editPathName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/textViewGiveName"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewPathDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/editTextDescription"
-        android:layout_below="@+id/editTextName"
+        android:layout_below="@+id/editPathName"
         android:layout_marginTop="61dp"
         android:text="Description"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/textViewPathDescription"
         android:ems="10"
         android:inputType="textMultiLine" />
 
@@ -54,5 +54,93 @@
         android:layout_centerHorizontal="true"
         android:backgroundTint="#F44336"
         android:text="Create" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/editTextDescription"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="60dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Max Acceleration"
+                android:id="@+id/textViewMaxAccel"
+                android:layout_column="0" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_column="1" />
+
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:id="@+id/editMaxAccel"
+                android:layout_column="2" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Max Jerk"
+                android:id="@+id/textViewMaxJerk"
+                android:layout_column="0" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_column="1" />
+
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:id="@+id/editMaxJerk"
+                android:layout_column="2" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Max Velocity"
+                android:id="@+id/textViewMaxVel"
+                android:layout_column="0" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_column="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editMaxVel"
+                android:layout_column="2" />
+        </TableRow>
+    </TableLayout>
+
 
 </RelativeLayout>

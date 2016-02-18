@@ -1,13 +1,10 @@
 package com.nutrons.autopilot;
 
-
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.nutrons.autopilot.lib.trajectory.Path;
 import com.nutrons.autopilot.lib.trajectory.PathGenerator;
@@ -19,7 +16,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 
 /**
@@ -62,12 +58,8 @@ public class TestFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //need to figure out how to convert getContext.getFilesDir() into a string
         String directory = getContext().getFilesDir().getPath();
 
-        //if (args.length >= 1) {
-        //    directory = args[0];
-        //}
         TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
 
         config.dt = .01;

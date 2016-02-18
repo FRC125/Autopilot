@@ -55,14 +55,13 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:backgroundTint="#F44336"
-        android:onClick="sendConfigData"
         android:text="Create" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/editTextDescription"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextDescription"
         android:layout_marginTop="60dp">
 
         <TableRow
@@ -70,12 +69,12 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/textViewMaxAccel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
                 android:text="Max Acceleration"
-                android:id="@+id/textViewMaxAccel"
-                android:layout_column="0" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Space
                 android:layout_width="40dp"
@@ -83,11 +82,11 @@
                 android:layout_column="1" />
 
             <EditText
+                android:id="@+id/editMaxAccel"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:id="@+id/editMaxAccel"
                 android:layout_column="2"
+                android:inputType="numberDecimal"
                 android:textColor="#000000" />
 
         </TableRow>
@@ -98,12 +97,12 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textViewMaxJerk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
                 android:text="Max Jerk"
-                android:id="@+id/textViewMaxJerk"
-                android:layout_column="0" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Space
                 android:layout_width="40dp"
@@ -111,11 +110,11 @@
                 android:layout_column="1" />
 
             <EditText
+                android:id="@+id/editMaxJerk"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:id="@+id/editMaxJerk"
                 android:layout_column="2"
+                android:inputType="numberDecimal"
                 android:textColor="#000000" />
 
         </TableRow>
@@ -125,12 +124,12 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/textViewMaxVel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
                 android:text="Max Velocity"
-                android:id="@+id/textViewMaxVel"
-                android:layout_column="0" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Space
                 android:layout_width="40dp"
@@ -138,12 +137,40 @@
                 android:layout_column="1" />
 
             <EditText
+                android:id="@+id/editMaxVel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:ems="10"
-                android:id="@+id/editMaxVel"
                 android:layout_column="2"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:textColor="#000000" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewWheelbaseWidth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:text="Wheelbase Width"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editWheelbaseWidth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:ems="10"
+                android:inputType="numberDecimal"
                 android:textColor="#000000" />
         </TableRow>
     </TableLayout>

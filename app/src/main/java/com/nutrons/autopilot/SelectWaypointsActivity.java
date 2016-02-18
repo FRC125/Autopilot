@@ -1,5 +1,6 @@
 package com.nutrons.autopilot;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -12,6 +13,13 @@ public class SelectWaypointsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_waypoints);
+
+        Intent intent = getIntent();
+        double maxAccel = intent.getDoubleExtra("MaxAccel",0.0);
+        double maxJerk = intent.getDoubleExtra("MaxJerk",0.0);
+        double maxVel = intent.getDoubleExtra("MaxVel",0.0);
+
+        System.out.println(maxAccel + " - " + maxJerk + " - " + maxVel);
     }
 
     @Override

@@ -53,6 +53,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:backgroundTint="#F44336"
+        android:onClick="sendConfigData"
         android:text="Create" />
 
     <TableLayout

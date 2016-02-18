@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragments(new PathsFragment(), "Paths");
         viewPagerAdapter.addFragments(new MatchesFragment(), "Matches");
-        viewPagerAdapter.addFragments(new TestFragment(), "Testytesty");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 

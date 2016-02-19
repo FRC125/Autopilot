@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 
 public class SelectWaypointsActivity extends AppCompatActivity {
     private double mPreviousX;
     private double mPreviousY;
+
+    private Button generateTrajectoryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,9 +19,10 @@ public class SelectWaypointsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_waypoints);
 
         Intent intent = getIntent();
-        double maxAccel = intent.getDoubleExtra("MaxAccel",0.0);
-        double maxJerk = intent.getDoubleExtra("MaxJerk",0.0);
-        double maxVel = intent.getDoubleExtra("MaxVel",0.0);
+        double maxAccel = intent.getDoubleExtra("MaxAccel", 0.0);
+        double maxJerk = intent.getDoubleExtra("MaxJerk", 0.0);
+        double maxVel = intent.getDoubleExtra("MaxVel", 0.0);
+        double kWheelbaseWidth = intent.getDoubleExtra("kWheelbaseWidth", 0.0);
         String pathname = intent.getStringExtra("pathName");
         String pathDescription = intent.getStringExtra("pathDescription");
     }

@@ -3,6 +3,8 @@ package com.nutrons.autopilot;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.nutrons.autopilot.lib.trajectory.Path;
 import com.nutrons.autopilot.lib.trajectory.PathGenerator;
@@ -16,6 +18,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class TrajectoryGeneratorActivity extends AppCompatActivity {
+    private Button goHomeButton;
+    private Button createAnotherButton;
 
     public static String joinPath(String path1, String path2) {
         File file1 = new File(path1);
@@ -55,6 +59,22 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
         double kWheelbaseWidth = intent.getDoubleExtra("kWheelbaseWidth", 0.0);
         String pathName = intent.getStringExtra("pathName");
         String pathDescription = intent.getStringExtra("pathDescription");
+
+        goHomeButton = (Button) findViewById(R.id.homeButton);
+        goHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TrajectoryGeneratorActivity.this, MainActivity.class));
+            }
+        });
+
+        createAnotherButton = (Button) findViewById(R.id.createAgainButton);
+        createAnotherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TrajectoryGeneratorActivity.this, CreatePathActivity.class));
+            }
+        });
 
         String directory = this.getFilesDir().getPath();
 

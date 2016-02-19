@@ -3,8 +3,10 @@ package com.nutrons.autopilot;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,8 @@ public class SelectWaypointsActivity extends AppCompatActivity {
     private Button generateTrajectoryButton;
     private Button clearButton;
     private TrajDrawingView trajView;
+    double[] waypointArrayX;
+    double[] waypointArrayY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,24 @@ public class SelectWaypointsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_waypoints);
 
         trajView = (TrajDrawingView) findViewById(R.id.view);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        //field y=56.2, x = 26.7
+
+        double kXPixelsPerFoot = width/26.7;
+        double kYPixelsPerFoot = height/56.2;
+
+        for(int i=0; i<trajView.circlePoints.size(); i++){
+            waypointArrayX = new double[trajView.circlePoints.size()];
+            waypointArrayX[i]= kXPixelsPerFoot*(trajView.circlePoints.get(i).x);
+            waypointArrayY = new double[trajView.circlePoints.size()];
+            waypointArrayY[i]= kYPixelsPerFoot*(trajView.circlePoints.get(i).y);
+        }
 
         Intent intent = getIntent();
         final double maxAccel = intent.getDoubleExtra("MaxAccel", 0.0);
@@ -42,6 +64,8 @@ public class SelectWaypointsActivity extends AppCompatActivity {
                 intent.putExtra("kWheelbaseWidth", kWheelbaseWidth);
                 intent.putExtra("pathName", pathName);
                 intent.putExtra("pathDescription", pathDescription);
+                intent.putExtra("waypointArrayX", waypointArrayX);
+                intent.putExtra("waypointArrayY", waypointArrayY);
 
                 startActivity(intent);
             }

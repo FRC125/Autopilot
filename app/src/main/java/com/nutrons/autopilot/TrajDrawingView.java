@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +21,10 @@ import java.util.List;
  * Created by Lydia on 2/19/2016.
  */
 public class TrajDrawingView extends View {
-    private Button clearButton;
     private Paint paint = new Paint();
-    private List<Point> circlePoints;
+    public List<Point> circlePoints;
 
-    public TrajDrawingView(Context context, AttributeSet attributeSet){
+    public TrajDrawingView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
 
         paint.setAntiAlias(true);
@@ -38,7 +38,7 @@ public class TrajDrawingView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        for(Point p : circlePoints){
+        for (Point p : circlePoints) {
             canvas.drawCircle(p.x, p.y, 20, paint);
         }
     }
@@ -47,19 +47,16 @@ public class TrajDrawingView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         float eventX = event.getX();
         float eventY = event.getY();
-        switch(event.getAction()) {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 circlePoints.add(new Point(Math.round(eventX), Math.round(eventY)));
-                System.out.println(eventX + " - " + eventY);
-                System.out.println("\n");
-                System.out.println(circlePoints);
                 break;
         }
         postInvalidate();
         return true;
     }
 
-    public void clear(){
+    public void clear() {
         circlePoints.clear();
 
         Context context = getContext();

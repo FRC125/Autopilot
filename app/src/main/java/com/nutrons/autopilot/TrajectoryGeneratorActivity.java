@@ -1,8 +1,10 @@
 package com.nutrons.autopilot;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 
@@ -57,6 +59,9 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
         double maxJerk = intent.getDoubleExtra("MaxJerk", 0.0);
         double maxVel = intent.getDoubleExtra("MaxVel", 0.0);
         double kWheelbaseWidth = intent.getDoubleExtra("kWheelbaseWidth", 0.0);
+        double[] waypointArrayX = intent.getDoubleArrayExtra("waypointArrayX");
+        double[] waypointArrayY = intent.getDoubleArrayExtra("waypointArrayY");
+
         String pathName = intent.getStringExtra("pathName");
         String pathDescription = intent.getStringExtra("pathDescription");
 
@@ -95,7 +100,12 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
 
             // Description of this auto mode path.
             WaypointSequence p = new WaypointSequence(10);
-            p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
+
+            /**for(int i=0; i<waypointArrayX.length; i++){
+                p.addWaypoint(new WaypointSequence.Waypoint(waypointArrayX[i], waypointArrayY[i], 0));
+            }**/
+
+           p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
             p.addWaypoint(new WaypointSequence.Waypoint(7.0, 0, 0));
             p.addWaypoint(new WaypointSequence.Waypoint(14.0, 1.0, Math.PI / 12.0));
 

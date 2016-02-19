@@ -1,14 +1,17 @@
 package com.nutrons.autopilot;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +51,22 @@ public class TrajDrawingView extends View {
             case MotionEvent.ACTION_DOWN:
                 circlePoints.add(new Point(Math.round(eventX), Math.round(eventY)));
                 System.out.println(eventX + " - " + eventY);
+                System.out.println("\n");
+                System.out.println(circlePoints);
                 break;
         }
         postInvalidate();
         return true;
+    }
+
+    public void clear(){
+        circlePoints.clear();
+
+        Context context = getContext();
+        CharSequence text = "Select a new waypoint to finish clearing";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }

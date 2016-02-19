@@ -11,11 +11,14 @@ import android.widget.Button;
 public class SelectWaypointsActivity extends AppCompatActivity {
     private Button generateTrajectoryButton;
     private Button clearButton;
+    private TrajDrawingView trajView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_waypoints);
+
+        trajView = (TrajDrawingView) findViewById(R.id.view);
 
         Intent intent = getIntent();
         double maxAccel = intent.getDoubleExtra("MaxAccel", 0.0);
@@ -27,7 +30,12 @@ public class SelectWaypointsActivity extends AppCompatActivity {
 
         this.generateTrajectoryButton = (Button) findViewById(R.id.generateTrajectoryButton);
 
-
         this.clearButton = (Button) findViewById(R.id.clearButton);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                trajView.clear();
+            }
+        });
     }
 }

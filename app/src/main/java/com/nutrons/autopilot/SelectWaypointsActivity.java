@@ -34,15 +34,8 @@ public class SelectWaypointsActivity extends AppCompatActivity {
 
         //field y=56.2, x = 26.7
 
-        double kXPixelsPerFoot = width/26.7;
-        double kYPixelsPerFoot = height/56.2;
-
-        for(int i=0; i<trajView.circlePoints.size(); i++){
-            waypointArrayX = new double[trajView.circlePoints.size()];
-            waypointArrayX[i]= kXPixelsPerFoot*(trajView.circlePoints.get(i).x);
-            waypointArrayY = new double[trajView.circlePoints.size()];
-            waypointArrayY[i]= kYPixelsPerFoot*(trajView.circlePoints.get(i).y);
-        }
+        final double kXPixelsPerFoot = width/26.7;
+        final double kYPixelsPerFoot = height/56.2;
 
         Intent intent = getIntent();
         final double maxAccel = intent.getDoubleExtra("MaxAccel", 0.0);
@@ -57,6 +50,19 @@ public class SelectWaypointsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SelectWaypointsActivity.this, TrajectoryGeneratorActivity.class);
+                waypointArrayX = new double[trajView.circlePoints.size()];
+                waypointArrayY = new double[trajView.circlePoints.size()];
+
+                for(int i=0; i<trajView.circlePoints.size(); i++){
+                    waypointArrayX[i]= (trajView.circlePoints.get(i).x)/kXPixelsPerFoot;
+                    waypointArrayY[i]= (trajView.circlePoints.get(i).y)/kYPixelsPerFoot;
+                }
+
+                System.out.println(kXPixelsPerFoot + " - " + kYPixelsPerFoot);
+
+                for(int i=0; i<waypointArrayX.length; i++){
+                    System.out.println(waypointArrayX[i]);
+                }
 
                 intent.putExtra("MaxAccel", maxAccel);
                 intent.putExtra("MaxJerk", maxJerk);

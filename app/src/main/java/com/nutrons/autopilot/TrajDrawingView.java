@@ -50,6 +50,7 @@ public class TrajDrawingView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 circlePoints.add(new Point(Math.round(eventX), Math.round(eventY)));
+                System.out.println(eventX + " - " + eventY);
                 break;
         }
         postInvalidate();

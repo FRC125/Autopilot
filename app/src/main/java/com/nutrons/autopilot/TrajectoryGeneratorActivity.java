@@ -101,13 +101,16 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
             // Description of this auto mode path.
             WaypointSequence p = new WaypointSequence(10);
 
-            /**for(int i=0; i<waypointArrayX.length; i++){
-                p.addWaypoint(new WaypointSequence.Waypoint(waypointArrayX[i], waypointArrayY[i], 0));
-            }**/
+            for(int i=0; i<waypointArrayX.length; i++){
+             p.addWaypoint(new WaypointSequence.Waypoint(waypointArrayX[i], waypointArrayY[i], 0));
+             }
 
-           p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
+            for (int i = 0; i < waypointArrayX.length; i++) {
+                System.out.println(waypointArrayX[i]);
+            }
+            /**p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
             p.addWaypoint(new WaypointSequence.Waypoint(7.0, 0, 0));
-            p.addWaypoint(new WaypointSequence.Waypoint(14.0, 1.0, Math.PI / 12.0));
+            p.addWaypoint(new WaypointSequence.Waypoint(14.0, 1.0, Math.PI / 12.0));**/
 
             Path path = PathGenerator.makePath(p, config,
                     kWheelbaseWidth, path_name);

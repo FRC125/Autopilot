@@ -12,6 +12,7 @@ public class SelectWaypointsActivity extends AppCompatActivity {
     private double mPreviousY;
 
     private Button generateTrajectoryButton;
+    private Button clearButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,9 @@ public class SelectWaypointsActivity extends AppCompatActivity {
         double kWheelbaseWidth = intent.getDoubleExtra("kWheelbaseWidth", 0.0);
         String pathname = intent.getStringExtra("pathName");
         String pathDescription = intent.getStringExtra("pathDescription");
+
+        this.generateTrajectoryButton = (Button) findViewById(R.id.generateTrajectoryButton);
+        this.clearButton = (Button) findViewById(R.id.clearButton);
     }
 
     @Override

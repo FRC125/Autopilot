@@ -1,10 +1,7 @@
 package com.nutrons.autopilot;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.nutrons.autopilot.lib.trajectory.Path;
 import com.nutrons.autopilot.lib.trajectory.PathGenerator;
@@ -17,16 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class TestFragment extends Fragment {
-
-
-    public TestFragment() {
-        // Required empty public constructor
-    }
+public class TrajectoryGeneratorActivity extends AppCompatActivity {
 
     public static String joinPath(String path1, String path2) {
         File file1 = new File(path1);
@@ -55,10 +43,10 @@ public class TestFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        String directory = getContext().getFilesDir().getPath();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_trajectory_generator);
+        String directory = this.getFilesDir().getPath();
 
         TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
 
@@ -100,11 +88,5 @@ public class TestFragment extends Fragment {
                 System.out.println("Wrote " + fullpath);
             }
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_test, container, false);
     }
 }

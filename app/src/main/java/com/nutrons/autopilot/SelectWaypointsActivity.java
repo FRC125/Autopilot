@@ -26,6 +26,8 @@ public class SelectWaypointsActivity extends AppCompatActivity {
         String pathDescription = intent.getStringExtra("pathDescription");
 
         this.generateTrajectoryButton = (Button) findViewById(R.id.generateTrajectoryButton);
+
+
         this.clearButton = (Button) findViewById(R.id.clearButton);
     }
 }

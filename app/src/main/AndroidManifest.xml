@@ -19,7 +19,7 @@
             android:name=".CreatePathActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".SelectWaypointsActivity" />
-        <activity android:name=".TrajectoryGeneratorActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"></activity>
+        <activity android:name=".TrajectoryGeneratorActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.nutrons.autopilot;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -46,16 +47,23 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trajectory_generator);
+
+        Intent intent = getIntent();
+        double maxAccel = intent.getDoubleExtra("MaxAccel", 0.0);
+        double maxJerk = intent.getDoubleExtra("MaxJerk", 0.0);
+        double maxVel = intent.getDoubleExtra("MaxVel", 0.0);
+        double kWheelbaseWidth = intent.getDoubleExtra("kWheelbaseWidth", 0.0);
+        String pathName = intent.getStringExtra("pathName");
+        String pathDescription = intent.getStringExtra("pathDescription");
+
         String directory = this.getFilesDir().getPath();
 
         TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
 
         config.dt = .01;
-        config.max_acc = 10.0;
-        config.max_jerk = 60.0;
-        config.max_vel = 15.0;
-
-        final double kWheelbaseWidth = 25.5 / 12;
+        config.max_acc = maxAccel;
+        config.max_jerk = maxJerk;
+        config.max_vel = maxVel;
 
         {
             config.dt = .01;
@@ -63,7 +71,7 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
             config.max_jerk = 50.0;
             config.max_vel = 10.0;
             // Path name must be a valid Java class name.
-            final String path_name = "Test";
+            final String path_name = pathName;
 
             // Description of this auto mode path.
             WaypointSequence p = new WaypointSequence(10);

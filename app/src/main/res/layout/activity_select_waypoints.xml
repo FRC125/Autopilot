@@ -18,10 +18,10 @@
         android:id="@+id/clearButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#F44336"
-        android:text="Clear"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:backgroundTint="#F44336"
+        android:text="Clear" />
 
     <ImageView
         android:id="@+id/fieldView"
@@ -36,17 +36,17 @@
         class="com.nutrons.autopilot.TrajDrawingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/fieldView"
         android:layout_below="@+id/generateTrajectoryButton"
-        android:layout_alignBottom="@+id/fieldView" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Please be patient after pressing the generate trajectory button, it takes a few moments to generate!"
-        android:id="@+id/textView"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/fieldView"
-        android:layout_alignParentStart="true" />
+        android:text="Please be patient after pressing the generate trajectory button, it takes a few moments to generate!"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

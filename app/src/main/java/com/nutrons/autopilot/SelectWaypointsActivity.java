@@ -1,16 +1,12 @@
 package com.nutrons.autopilot;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class SelectWaypointsActivity extends AppCompatActivity {
     private Button generateTrajectoryButton;
@@ -32,10 +28,10 @@ public class SelectWaypointsActivity extends AppCompatActivity {
         int width = size.x;
         int height = size.y;
 
-        //field y=56.2, x = 26.7
+        //field y=56.2 ft, x = 26.7 ft
 
-        final double kXPixelsPerFoot = width/26.7;
-        final double kYPixelsPerFoot = height/56.2;
+        final double kXPixelsPerFoot = width / 26.7;
+        final double kYPixelsPerFoot = height / 56.2;
 
         Intent intent = getIntent();
         final double maxAccel = intent.getDoubleExtra("MaxAccel", 0.0);
@@ -46,6 +42,7 @@ public class SelectWaypointsActivity extends AppCompatActivity {
         final String pathDescription = intent.getStringExtra("pathDescription");
 
         this.generateTrajectoryButton = (Button) findViewById(R.id.generateTrajectoryButton);
+
         generateTrajectoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,15 +50,9 @@ public class SelectWaypointsActivity extends AppCompatActivity {
                 waypointArrayX = new double[trajView.circlePoints.size()];
                 waypointArrayY = new double[trajView.circlePoints.size()];
 
-                for(int i=0; i<trajView.circlePoints.size(); i++){
-                    waypointArrayX[i]= (trajView.circlePoints.get(i).x)/kXPixelsPerFoot;
-                    waypointArrayY[i]= (trajView.circlePoints.get(i).y)/kYPixelsPerFoot;
-                }
-
-                System.out.println(kXPixelsPerFoot + " - " + kYPixelsPerFoot);
-
-                for(int i=0; i<waypointArrayX.length; i++){
-                    System.out.println(waypointArrayX[i]);
+                for (int i = 0; i < trajView.circlePoints.size(); i++) {
+                    waypointArrayX[i] = (trajView.circlePoints.get(i).x) / kXPixelsPerFoot;
+                    waypointArrayY[i] = (trajView.circlePoints.get(i).y) / kYPixelsPerFoot;
                 }
 
                 intent.putExtra("MaxAccel", maxAccel);
@@ -76,7 +67,6 @@ public class SelectWaypointsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         this.clearButton = (Button) findViewById(R.id.clearButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override

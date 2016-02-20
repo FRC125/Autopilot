@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class CreatePathActivity extends AppCompatActivity {
@@ -31,9 +30,9 @@ public class CreatePathActivity extends AppCompatActivity {
                 EditText editPathName = (EditText) findViewById(R.id.editPathName);
                 EditText editPathDescription = (EditText) findViewById(R.id.editTextDescription);
 
-                if ( ( editMaxAccel.getText().toString().trim().equals("")) || (editMaxJerk.getText().toString().trim().equals(""))|| (editMaxVel.getText().toString().trim().equals(""))||(editWheelbaseWidth.getText().toString().trim().equals(""))){
+                if ((editMaxAccel.getText().toString().trim().equals("")) || (editMaxJerk.getText().toString().trim().equals("")) || (editMaxVel.getText().toString().trim().equals("")) || (editWheelbaseWidth.getText().toString().trim().equals(""))) {
                     Toast.makeText(getApplicationContext(), "Required field is empty", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     double maxAccel = Double.parseDouble(editMaxAccel.getText().toString());
                     double maxJerk = Double.parseDouble(editMaxJerk.getText().toString());
                     double maxVel = Double.parseDouble(editMaxVel.getText().toString());

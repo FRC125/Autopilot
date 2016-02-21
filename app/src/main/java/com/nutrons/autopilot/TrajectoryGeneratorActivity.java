@@ -86,7 +86,8 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
             }
         });
 
-        String directory = this.getFilesDir().getPath();
+        File mirectory = this.getDir("NUTRONsCAT", MODE_PRIVATE);
+        String directory = mirectory.getPath();
 
         TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
 

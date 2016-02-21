@@ -1,5 +1,6 @@
 package com.nutrons.autopilot;
 
+import android.content.Context;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 
@@ -8,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +31,9 @@ public class PathsFragment extends ListFragment implements AdapterView.OnItemCli
 
         if(getContext().fileList()==null){
             emptyMessage.setVisibility(View.VISIBLE);
-            System.out.println("No paths yet!");
         }else{
             emptyMessage.setVisibility(View.GONE);
-            String[] test = getContext().fileList();
+            String[] test = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).list();
             ArrayAdapter adapter = new ArrayAdapter<String>(getContext(), R.layout.list_red_text, test);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);

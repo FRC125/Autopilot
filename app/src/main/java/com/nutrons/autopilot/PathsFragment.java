@@ -5,14 +5,16 @@ import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PathsFragment extends ListFragment implements AdapterView.OnItemClickListener {
+public class PathsFragment extends ListFragment{
 
     public PathsFragment() {
         // Required empty public constructor
@@ -36,11 +38,29 @@ public class PathsFragment extends ListFragment implements AdapterView.OnItemCli
             String[] test = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).list();
             ArrayAdapter adapter = new ArrayAdapter<String>(getContext(), R.layout.list_red_text, test);
             setListAdapter(adapter);
-            getListView().setOnItemClickListener(this);
+            getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    PopupMenu popup = new PopupMenu(getActivity(), view);
+                    popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+                    popup.show();
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.download:
+                                    Toast.makeText(getActivity(), "Downloading...", Toast.LENGTH_SHORT).show();
+                                    return true;
+                                case R.id.delete:
+                                    getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).delete();
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+                }
+            });
         }
-    }
-
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getActivity(), "Placeholder for click stuff", Toast.LENGTH_SHORT).show();
     }
 }

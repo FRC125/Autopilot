@@ -36,7 +36,7 @@ public class SSHTestActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 commander.println("ls");
-                commander.println("put" + file.getPath() + "/root");
+                commander.println("put" + file.getPath() + "/home/lvuser");
             }
         });
     }

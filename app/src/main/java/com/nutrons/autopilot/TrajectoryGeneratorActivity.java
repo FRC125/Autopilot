@@ -1,6 +1,7 @@
 package com.nutrons.autopilot;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +13,16 @@ import com.nutrons.autopilot.lib.trajectory.TrajectoryGenerator;
 import com.nutrons.autopilot.lib.trajectory.WaypointSequence;
 import com.nutrons.autopilot.lib.trajectory.io.TextFileSerializer;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 
 public class TrajectoryGeneratorActivity extends AppCompatActivity {
     private Button goHomeButton;

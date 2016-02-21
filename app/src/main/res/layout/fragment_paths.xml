@@ -8,7 +8,19 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Aw snap! You don&apos;t have any paths yet. Go make some!"
+            android:id="@+id/textViewEmptyMessage"
+            android:textColor="#000000" />
 
         <ListView
             android:id="@android:id/list"

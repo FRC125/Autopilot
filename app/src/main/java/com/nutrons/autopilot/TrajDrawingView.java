@@ -51,12 +51,6 @@ public class TrajDrawingView extends View {
 
     public void clear() {
         circlePoints.clear();
-
-        Context context = getContext();
-        CharSequence text = "Select a new waypoint";
-        int duration = Toast.LENGTH_LONG;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        invalidate();
     }
 }

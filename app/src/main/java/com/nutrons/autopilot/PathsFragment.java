@@ -18,7 +18,6 @@ import android.widget.Toast;
 import java.io.File;
 
 public class PathsFragment extends ListFragment{
-    File[] pathFiles = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).listFiles();
 
     public PathsFragment() {
         // Required empty public constructor
@@ -34,6 +33,8 @@ public class PathsFragment extends ListFragment{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         TextView emptyMessage = (TextView) getActivity().findViewById(R.id.textViewEmptyMessage);
+        
+        final File[] pathFiles = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).listFiles();
 
         if(getContext().fileList()==null){
             emptyMessage.setVisibility(View.VISIBLE);

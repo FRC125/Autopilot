@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jcraft.jsch.ChannelShell;
@@ -28,6 +29,7 @@ public class PathsFragment extends ListFragment{
     Context context = getContext();
     File[] pathFiles;
     int itemPosition;
+    private ProgressBar progressBar;
 
     public PathsFragment() {
         // Required empty public constructor
@@ -43,6 +45,8 @@ public class PathsFragment extends ListFragment{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         TextView emptyMessage = (TextView) getActivity().findViewById(R.id.textViewEmptyMessage);
+        progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
+        progressBar.setMax(30);
 
         pathFiles = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).listFiles();
 
@@ -66,12 +70,14 @@ public class PathsFragment extends ListFragment{
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
                                 case R.id.download:
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    progressBar.setProgress(0);
                                     SSHToRoboRIOTask task = new SSHToRoboRIOTask();
                                     task.execute();
                                     return true;
                                 case R.id.delete:
                                     getContext().deleteFile(paths[position]);
-                                    getListView().invalidate();
+                                    getListView().invalidateViews();
                                     return true;
                                 default:
                                     return false;
@@ -95,7 +101,6 @@ public class PathsFragment extends ListFragment{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            commander.println("ls");
             commander.println("put " + directory + " /home/lvuser");
 
             return null;

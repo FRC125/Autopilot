@@ -1,7 +1,6 @@
 package com.nutrons.autopilot;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
@@ -67,9 +66,8 @@ public class PathsFragment extends ListFragment{
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
                                 case R.id.download:
-                                    Intent intent = new Intent(getActivity(), SSHToRoboRIOActivity.class);
-                                    intent.putExtra("File", pathFiles[position].getPath());
-                                    startActivity(intent);
+                                    SSHToRoboRIOTask task = new SSHToRoboRIOTask();
+                                    task.execute();
                                     return true;
                                 case R.id.delete:
                                     getContext().deleteFile(paths[position]);
@@ -84,13 +82,13 @@ public class PathsFragment extends ListFragment{
             });
         }
     }
-    private class SSHToRoboRIOTask extends AsyncTask<File[], Void, Void> {
+    private class SSHToRoboRIOTask extends AsyncTask<Void, Void, Void> {
         PrintStream commander;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Session session;
 
         @Override
-        protected Void doInBackground(File[]... params) {
+        protected Void doInBackground(Void... params) {
             String directory = pathFiles[itemPosition].getPath();
             try {
                 executeRemoteCommand("admin","admin","10.1.25.2", 22);

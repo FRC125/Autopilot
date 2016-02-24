@@ -2,6 +2,7 @@ package com.nutrons.autopilot;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 
@@ -13,11 +14,21 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.jcraft.jsch.ChannelShell;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.Properties;
 
 public class PathsFragment extends ListFragment{
+    Context context = getContext();
+    File[] pathFiles;
+    int itemPosition;
 
     public PathsFragment() {
         // Required empty public constructor
@@ -34,18 +45,20 @@ public class PathsFragment extends ListFragment{
         super.onActivityCreated(savedInstanceState);
         TextView emptyMessage = (TextView) getActivity().findViewById(R.id.textViewEmptyMessage);
 
-        final File[] pathFiles = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).listFiles();
+        pathFiles = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).listFiles();
 
         if(getContext().fileList()==null){
             emptyMessage.setVisibility(View.VISIBLE);
         }else{
             emptyMessage.setVisibility(View.GONE);
-            String[] paths = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).list();
+            final String[] paths = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).list();
             ArrayAdapter adapter = new ArrayAdapter<String>(getContext(), R.layout.list_red_text, paths);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    itemPosition = position;
+
                     PopupMenu popup = new PopupMenu(getActivity(), view);
                     popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
                     popup.show();
@@ -57,10 +70,10 @@ public class PathsFragment extends ListFragment{
                                     Intent intent = new Intent(getActivity(), SSHToRoboRIOActivity.class);
                                     intent.putExtra("File", pathFiles[position].getPath());
                                     startActivity(intent);
-                                    Toast.makeText(getActivity(), "Downloading...", Toast.LENGTH_SHORT).show();
                                     return true;
                                 case R.id.delete:
-                                    getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).delete();
+                                    getContext().deleteFile(paths[position]);
+                                    getListView().invalidate();
                                     return true;
                                 default:
                                     return false;
@@ -69,6 +82,55 @@ public class PathsFragment extends ListFragment{
                     });
                 }
             });
+        }
+    }
+    private class SSHToRoboRIOTask extends AsyncTask<File[], Void, Void> {
+        PrintStream commander;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Session session;
+
+        @Override
+        protected Void doInBackground(File[]... params) {
+            String directory = pathFiles[itemPosition].getPath();
+            try {
+                executeRemoteCommand("admin","admin","10.1.25.2", 22);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            commander.println("ls");
+            commander.println("put " + directory + " /home/lvuser");
+
+            return null;
+        }
+        public String executeRemoteCommand(String username, String password, String hostname, int port)
+                throws Exception {
+            JSch jsch = new JSch();
+            session = jsch.getSession(username, hostname, port);
+            session.setPassword(password);
+
+            // Avoid asking for key confirmation
+            Properties prop = new Properties();
+            prop.put("StrictHostKeyChecking", "no");
+            session.setConfig(prop);
+
+            session.connect();
+
+            // SSH Channel
+            ChannelShell channelssh = (ChannelShell)
+                    session.openChannel("shell");
+            OutputStream inputstream_for_the_channel = channelssh.getOutputStream();
+            commander = new PrintStream(inputstream_for_the_channel, true);
+
+            channelssh.setOutputStream(baos);
+
+            channelssh.setOutputStream(System.out, true);
+
+            channelssh.connect();
+
+            commander.close();
+            session.disconnect();
+            channelssh.disconnect();
+            return baos.toString();
         }
     }
 }

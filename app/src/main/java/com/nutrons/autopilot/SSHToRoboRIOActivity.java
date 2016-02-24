@@ -9,7 +9,6 @@ import android.widget.Button;
 import com.jcraft.jsch.*;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Properties;
@@ -22,7 +21,7 @@ public class SSHToRoboRIOActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sshtest);
+        setContentView(R.layout.activity_ssh_to_roborio);
 
         Intent intent = getIntent();
         final String directory = intent.getStringExtra("File");

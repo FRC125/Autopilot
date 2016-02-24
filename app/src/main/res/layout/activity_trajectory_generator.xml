@@ -28,7 +28,7 @@
         android:layout_marginRight="20dp"
         android:background="#F44336"
         android:text="GO BACK TO HOME"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"                                                                                                                                                                                                                                                                                         />
 
     <Button
         android:id="@+id/createAgainButton"

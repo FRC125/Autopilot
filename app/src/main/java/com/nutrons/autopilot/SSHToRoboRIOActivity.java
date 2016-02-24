@@ -1,5 +1,6 @@
 package com.nutrons.autopilot;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,18 +14,18 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Properties;
 
-public class SSHTestActivity extends AppCompatActivity {
+public class SSHToRoboRIOActivity extends AppCompatActivity {
     static PrintStream commander;
     static ByteArrayOutputStream baos = new ByteArrayOutputStream();
     static Session session;
+
+    Intent intent = getIntent();
+    String directory = intent.getStringExtra("File");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sshtest);
-        String directory = getApplicationContext().getDir("NUTRONsCAT", CONTEXT_IGNORE_SECURITY).getPath();
-        final File file = new File(directory);
-
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +37,7 @@ public class SSHTestActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 commander.println("ls");
-                commander.println("put" + file.getPath() + "/home/lvuser");
+                commander.println("put " + directory + " /home/lvuser");
             }
         });
     }

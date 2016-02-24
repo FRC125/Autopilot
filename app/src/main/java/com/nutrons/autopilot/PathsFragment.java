@@ -1,6 +1,7 @@
 package com.nutrons.autopilot;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 
@@ -14,7 +15,10 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class PathsFragment extends ListFragment{
+    File[] pathFiles = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).listFiles();
 
     public PathsFragment() {
         // Required empty public constructor
@@ -35,12 +39,12 @@ public class PathsFragment extends ListFragment{
             emptyMessage.setVisibility(View.VISIBLE);
         }else{
             emptyMessage.setVisibility(View.GONE);
-            String[] test = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).list();
-            ArrayAdapter adapter = new ArrayAdapter<String>(getContext(), R.layout.list_red_text, test);
+            String[] paths = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).list();
+            ArrayAdapter adapter = new ArrayAdapter<String>(getContext(), R.layout.list_red_text, paths);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                     PopupMenu popup = new PopupMenu(getActivity(), view);
                     popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
                     popup.show();
@@ -49,6 +53,9 @@ public class PathsFragment extends ListFragment{
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
                                 case R.id.download:
+                                    Intent intent = new Intent(getActivity(), SSHToRoboRIOActivity.class);
+                                    intent.putExtra("File", pathFiles[getSelectedItemPosition()].getPath());
+                                    startActivity(intent);
                                     Toast.makeText(getActivity(), "Downloading...", Toast.LENGTH_SHORT).show();
                                     return true;
                                 case R.id.delete:

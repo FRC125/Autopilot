@@ -33,7 +33,7 @@ public class PathsFragment extends ListFragment{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         TextView emptyMessage = (TextView) getActivity().findViewById(R.id.textViewEmptyMessage);
-        
+
         final File[] pathFiles = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).listFiles();
 
         if(getContext().fileList()==null){
@@ -55,7 +55,7 @@ public class PathsFragment extends ListFragment{
                             switch (item.getItemId()) {
                                 case R.id.download:
                                     Intent intent = new Intent(getActivity(), SSHToRoboRIOActivity.class);
-                                    intent.putExtra("File", pathFiles[getSelectedItemPosition()].getPath());
+                                    intent.putExtra("File", pathFiles[position].getPath());
                                     startActivity(intent);
                                     Toast.makeText(getActivity(), "Downloading...", Toast.LENGTH_SHORT).show();
                                     return true;

@@ -19,13 +19,13 @@ public class SSHToRoboRIOActivity extends AppCompatActivity {
     static ByteArrayOutputStream baos = new ByteArrayOutputStream();
     static Session session;
 
-    Intent intent = getIntent();
-    String directory = intent.getStringExtra("File");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sshtest);
+
+        Intent intent = getIntent();
+        final String directory = intent.getStringExtra("File");
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {

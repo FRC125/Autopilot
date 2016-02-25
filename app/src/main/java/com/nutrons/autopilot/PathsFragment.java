@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jcraft.jsch.ChannelShell;
 import com.jcraft.jsch.JSch;
@@ -29,7 +30,6 @@ public class PathsFragment extends ListFragment{
     Context context = getContext();
     File[] pathFiles;
     int itemPosition;
-    private ProgressBar progressBar;
 
     public PathsFragment() {
         // Required empty public constructor
@@ -45,8 +45,6 @@ public class PathsFragment extends ListFragment{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         TextView emptyMessage = (TextView) getActivity().findViewById(R.id.textViewEmptyMessage);
-        progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
-        progressBar.setMax(30);
 
         pathFiles = getContext().getDir("NUTRONsCAT", Context.MODE_PRIVATE).listFiles();
 
@@ -70,8 +68,6 @@ public class PathsFragment extends ListFragment{
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
                                 case R.id.download:
-                                    progressBar.setVisibility(View.VISIBLE);
-                                    progressBar.setProgress(0);
                                     SSHToRoboRIOTask task = new SSHToRoboRIOTask();
                                     task.execute();
                                     return true;
@@ -94,10 +90,16 @@ public class PathsFragment extends ListFragment{
         Session session;
 
         @Override
+        protected void onPreExecute(){
+            Toast.makeText(getActivity(), "Please wait...", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
         protected Void doInBackground(Void... params) {
             String directory = pathFiles[itemPosition].getPath();
             try {
                 executeRemoteCommand("admin","admin","10.1.25.2", 22);
+                publishProgress();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -134,6 +136,11 @@ public class PathsFragment extends ListFragment{
             session.disconnect();
             channelssh.disconnect();
             return baos.toString();
+        }
+
+        @Override
+        protected void onPostExecute(Void v){
+            Toast.makeText(getActivity(), "Downloaded!", Toast.LENGTH_SHORT).show();
         }
     }
 }

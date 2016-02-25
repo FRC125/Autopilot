@@ -28,13 +28,5 @@
             android:layout_height="431dp"
             android:layout_marginTop="105dp"></ListView>
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:layout_below="@+id/list"
-            android:layout_gravity="center_horizontal" />
-
     </LinearLayout>
 </FrameLayout>

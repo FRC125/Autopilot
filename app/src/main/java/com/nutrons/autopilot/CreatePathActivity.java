@@ -28,7 +28,6 @@ public class CreatePathActivity extends AppCompatActivity {
                 EditText editMaxVel = (EditText) findViewById(R.id.editMaxVel);
                 EditText editWheelbaseWidth = (EditText) findViewById(R.id.editWheelbaseWidth);
                 EditText editPathName = (EditText) findViewById(R.id.editPathName);
-                EditText editPathDescription = (EditText) findViewById(R.id.editTextDescription);
 
                 if ((editMaxAccel.getText().toString().trim().equals("")) || (editMaxJerk.getText().toString().trim().equals("")) || (editMaxVel.getText().toString().trim().equals("")) || (editWheelbaseWidth.getText().toString().trim().equals(""))) {
                     Toast.makeText(getApplicationContext(), "Required field is empty", Toast.LENGTH_SHORT).show();
@@ -38,14 +37,12 @@ public class CreatePathActivity extends AppCompatActivity {
                     double maxVel = Double.parseDouble(editMaxVel.getText().toString());
                     double kWheelbaseWidth = Double.parseDouble(editWheelbaseWidth.getText().toString());
                     String pathName = editPathName.getText().toString();
-                    String pathDescription = editPathDescription.getText().toString();
 
                     intent.putExtra("MaxAccel", maxAccel);
                     intent.putExtra("MaxJerk", maxJerk);
                     intent.putExtra("MaxVel", maxVel);
                     intent.putExtra("kWheelbaseWidth", kWheelbaseWidth);
                     intent.putExtra("pathName", pathName);
-                    intent.putExtra("pathDescription", pathDescription);
 
                     startActivity(intent);
                 }

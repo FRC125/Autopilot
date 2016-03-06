@@ -39,7 +39,6 @@ public class SelectWaypointsActivity extends AppCompatActivity {
         final double maxVel = intent.getDoubleExtra("MaxVel", 0.0);
         final double kWheelbaseWidth = intent.getDoubleExtra("kWheelbaseWidth", 0.0);
         final String pathName = intent.getStringExtra("pathName");
-        final String pathDescription = intent.getStringExtra("pathDescription");
 
         this.generateTrajectoryButton = (Button) findViewById(R.id.generateTrajectoryButton);
 
@@ -60,7 +59,6 @@ public class SelectWaypointsActivity extends AppCompatActivity {
                 intent.putExtra("MaxVel", maxVel);
                 intent.putExtra("kWheelbaseWidth", kWheelbaseWidth);
                 intent.putExtra("pathName", pathName);
-                intent.putExtra("pathDescription", pathDescription);
                 intent.putExtra("waypointArrayX", waypointArrayX);
                 intent.putExtra("waypointArrayY", waypointArrayY);
 

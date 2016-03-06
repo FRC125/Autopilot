@@ -12,8 +12,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 
 public class PathsFragment extends ListFragment {
     Context context = getContext();
@@ -62,8 +64,13 @@ public class PathsFragment extends ListFragment {
                                     ScpTo.main(params);
                                     return true;
                                 case R.id.delete:
-                                    getContext().deleteFile(paths[position]);
-                                    getListView().invalidateViews();
+                                    boolean ifDeleted = pathFiles[position].delete();
+                                    if(ifDeleted){
+                                        Toast.makeText(getActivity(), "Deleted! (Sorry view doesn't refresh)", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(getActivity(), "Whoops! Not deleted!", Toast.LENGTH_SHORT).show();
+                                    }
+                                    getListView().invalidate();
                                     return true;
                                 default:
                                     return false;

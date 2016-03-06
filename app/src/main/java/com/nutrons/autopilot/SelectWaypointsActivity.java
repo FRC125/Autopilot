@@ -22,16 +22,13 @@ public class SelectWaypointsActivity extends AppCompatActivity {
 
         trajView = (TrajDrawingView) findViewById(R.id.view);
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+        double imageWidth = trajView.getWidth();
+        double imageHeight = trajView.getHeight();
 
         //field y=56.2 ft, x = 26.7 ft
 
-        final double kXPixelsPerFoot = width / 26.7;
-        final double kYPixelsPerFoot = height / 56.2;
+        final double kXPixelsPerFoot = imageWidth / 26.7;
+        final double kYPixelsPerFoot = imageHeight / 56.2;
 
         Intent intent = getIntent();
         final double maxAccel = intent.getDoubleExtra("MaxAccel", 0.0);

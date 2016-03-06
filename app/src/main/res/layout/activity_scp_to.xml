@@ -9,13 +9,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SSHToRoboRIOActivity">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TESTING SSH BUTTON CLICKY CLICKY"
-        android:id="@+id/button"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="208dp"
-        android:background="#c82828" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Success!"
+        android:id="@+id/successTextView"
+        android:textColor="#000000"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go back to home!"
+        android:id="@+id/backHomeButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#F44336"/>
 </RelativeLayout>

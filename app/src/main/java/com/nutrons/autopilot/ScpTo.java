@@ -10,17 +10,34 @@ package com.nutrons.autopilot;
  * 'file2' on 'remotehost'.
  *
  */
-import com.jcraft.jsch.*;
-//import java.awt.*;
-//import javax.swing.*;
-import java.io.*;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
-public class ScpTo{
+import com.jcraft.jsch.*;
+import java.io.*;
+import java.util.Properties;
+
+public class ScpTo extends AppCompatActivity{
+    private Button goBackHomeButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_scp_to);
+
+        goBackHomeButton = (Button) findViewById(R.id.backHomeButton);
+        goBackHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Intent(ScpTo.this, MainActivity.class);
+            }
+        });
+    }
+
     public static void main(String[] arg){
-        if(arg.length!=2){
-            System.err.println("usage: java ScpTo file1 user@remotehost:file2");
-            System.exit(-1);
-        }
 
         FileInputStream fis=null;
         try{
@@ -29,19 +46,18 @@ public class ScpTo{
             String host = arg[2];
             String rfile = arg[3];
 
-            //String user=arg[1].substring(0, arg[1].indexOf('@'));
-            ////arg[1]=arg[1].substring(arg[1].indexOf('@')+1);
-            //String host=arg[1].substring(0, arg[1].indexOf(':'));
-            //String rfile=arg[1].substring(arg[1].indexOf(':')+1);
-
             JSch jsch=new JSch();
             Session session=jsch.getSession(user, host, 22);
 
             session.setPassword("admin");
 
+            Properties prop = new Properties();
+            prop.put("StrictHostKeyChecking", "no");
+            session.setConfig(prop);
+
             session.connect();
 
-            boolean ptimestamp = true;
+            boolean ptimestamp = false;
 
             // exec 'scp -t rfile' remotely
             String command="scp " + (ptimestamp ? "-p" :"") +" -t "+rfile;
@@ -53,10 +69,6 @@ public class ScpTo{
             InputStream in=channel.getInputStream();
 
             channel.connect();
-
-            if(checkAck(in)!=0){
-                System.exit(0);
-            }
 
             File _lfile = new File(lfile);
 

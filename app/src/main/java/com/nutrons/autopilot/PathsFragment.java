@@ -1,6 +1,7 @@
 package com.nutrons.autopilot;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 
@@ -15,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
 
 public class PathsFragment extends ListFragment {
     Context context = getContext();
@@ -59,9 +59,24 @@ public class PathsFragment extends ListFragment {
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
                                 case R.id.download:
-                                    String lDirectory = pathFiles[itemPosition].getPath();
-                                    String[] params = {lDirectory, "admin", "10.1.25.25", "/home/lvuser"};
-                                    ScpTo.main(params);
+                                    new AsyncTask<Integer, Void, Void>(){
+                                        @Override
+                                        protected Void doInBackground(Integer... params) {
+                                            try {
+                                                String lDirectory = pathFiles[itemPosition].getPath();
+                                                String[] config = {lDirectory, "admin", "10.1.25.25", "/home/lvuser"};
+                                                ScpTo.main(config);
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                            return null;
+                                        }
+                                    }.execute(1);
+
+                                    //String lDirectory = pathFiles[itemPosition].getPath();
+                                    //String[] params = {lDirectory, "admin", "10.1.25.25", "/home/lvuser"};
+                                    //ScpTo.main(params);
+
                                     return true;
                                 case R.id.delete:
                                     boolean ifDeleted = pathFiles[position].delete();

@@ -67,7 +67,8 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
         double[] waypointArrayX = intent.getDoubleArrayExtra("waypointArrayX");
         double[] waypointArrayY = intent.getDoubleArrayExtra("waypointArrayY");
 
-        String pathName = intent.getStringExtra("pathName");
+        //String pathName = intent.getStringExtra("pathName");
+        String pathName = "CustomTrajectory";
         String pathDescription = intent.getStringExtra("pathDescription");
 
         goHomeButton = (Button) findViewById(R.id.homeButton);

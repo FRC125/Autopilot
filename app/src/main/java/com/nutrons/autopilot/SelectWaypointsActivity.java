@@ -46,9 +46,11 @@ public class SelectWaypointsActivity extends AppCompatActivity {
                 waypointArrayX = new double[trajView.circlePoints.size()];
                 waypointArrayY = new double[trajView.circlePoints.size()];
 
-                for (int i = 0; i < trajView.circlePoints.size(); i++) {
-                    waypointArrayX[i] = (trajView.circlePoints.get(i).x) / kXPixelsPerFoot;
-                    waypointArrayY[i] = (trajView.circlePoints.get(i).y) / kYPixelsPerFoot;
+                for (int i = 1; i < trajView.circlePoints.size() - 1; i++) {
+                    waypointArrayX[0] = 0;
+                    waypointArrayY[0] = 0;
+                    waypointArrayX[i - 1] = (trajView.circlePoints.get(i).x) / kXPixelsPerFoot;
+                    waypointArrayY[i - 1] = (trajView.circlePoints.get(i).y) / kYPixelsPerFoot;
                 }
 
                 intent.putExtra("MaxAccel", maxAccel);

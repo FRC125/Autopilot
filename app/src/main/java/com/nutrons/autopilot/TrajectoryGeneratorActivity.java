@@ -67,7 +67,7 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
         double[] waypointArrayX = intent.getDoubleArrayExtra("waypointArrayX");
         double[] waypointArrayY = intent.getDoubleArrayExtra("waypointArrayY");
 
-        String pathName = intent.getStringExtra("pathName");
+        String pathName = "CustomTrajectory";
         String pathDescription = intent.getStringExtra("pathDescription");
 
         for(int i = 0; i<waypointArrayX.length; i++){

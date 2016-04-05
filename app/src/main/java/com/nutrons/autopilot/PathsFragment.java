@@ -1,6 +1,9 @@
 package com.nutrons.autopilot;
 
 import android.content.Context;
+import android.content.Intent;
+import android.hardware.usb.UsbAccessory;
+import android.hardware.usb.UsbManager;
 import android.os.AsyncTask;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
@@ -65,17 +68,15 @@ public class PathsFragment extends ListFragment {
                                             try {
                                                 String lDirectory = pathFiles[itemPosition].getPath();
                                                 String[] config = {lDirectory, "admin", "10.1.25.25", "/home/lvuser"};
-                                                ScpTo.main(config);
+                                                UsbManager manager = (UsbManager) getContext().getSystemService(Context.USB_SERVICE);
+                                                UsbAccessory accessory = (UsbAccessory) getActivity().getIntent().getParcelableExtra(UsbManager.EXTRA_ACCESSORY);
+
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                             return null;
                                         }
                                     }.execute(1);
-
-                                    //String lDirectory = pathFiles[itemPosition].getPath();
-                                    //String[] params = {lDirectory, "admin", "10.1.25.25", "/home/lvuser"};
-                                    //ScpTo.main(params);
 
                                     return true;
                                 case R.id.delete:

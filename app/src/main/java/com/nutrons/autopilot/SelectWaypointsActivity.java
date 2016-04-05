@@ -2,6 +2,7 @@ package com.nutrons.autopilot;
 
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -22,17 +23,6 @@ public class SelectWaypointsActivity extends AppCompatActivity {
 
         trajView = (TrajDrawingView) findViewById(R.id.view);
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-
-        //field y=56.2 ft, x = 26.7 ft
-
-        final double kXPixelsPerFoot = width / 26.7;
-        final double kYPixelsPerFoot = height / 56.2;
-
         Intent intent = getIntent();
         final double maxAccel = intent.getDoubleExtra("MaxAccel", 0.0);
         final double maxJerk = intent.getDoubleExtra("MaxJerk", 0.0);
@@ -49,10 +39,17 @@ public class SelectWaypointsActivity extends AppCompatActivity {
                 waypointArrayX = new double[trajView.circlePoints.size()];
                 waypointArrayY = new double[trajView.circlePoints.size()];
 
+                //field y=30 ft, x = 26.7 ft
+
+                final double kXPixelsPerFoot = trajView.imageWidth / 26.7;
+                final double kYPixelsPerFoot = (trajView.imageHeight - .14*trajView.imageHeight) / 30.0;
+
                 for (int i = 0; i < trajView.circlePoints.size(); i++) {
                     waypointArrayX[i] = (trajView.circlePoints.get(i).x) / kXPixelsPerFoot;
                     waypointArrayY[i] = (trajView.circlePoints.get(i).y) / kYPixelsPerFoot;
                 }
+
+                System.out.println(trajView.imageWidth  + " - " +  trajView.imageHeight);
 
                 intent.putExtra("MaxAccel", maxAccel);
                 intent.putExtra("MaxJerk", maxJerk);

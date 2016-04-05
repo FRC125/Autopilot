@@ -70,6 +70,15 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
         String pathName = intent.getStringExtra("pathName");
         String pathDescription = intent.getStringExtra("pathDescription");
 
+        for(int i = 0; i<waypointArrayX.length; i++){
+            waypointArrayX[i] = waypointArrayX[i] - waypointArrayX[0];
+            waypointArrayY[i] = waypointArrayY[i] - waypointArrayY[0];
+        }
+
+        for(int i = 0; i<waypointArrayX.length; i++){
+            System.out.println(waypointArrayX[i] + " - " + waypointArrayY[i]);
+        }
+
         goHomeButton = (Button) findViewById(R.id.homeButton);
         goHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override

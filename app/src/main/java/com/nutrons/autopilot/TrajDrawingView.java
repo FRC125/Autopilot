@@ -16,6 +16,8 @@ import java.util.List;
 public class TrajDrawingView extends View {
     private Paint paint = new Paint();
     public List<Point> circlePoints;
+    public double imageWidth;
+    public double imageHeight;
 
     public TrajDrawingView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -33,6 +35,8 @@ public class TrajDrawingView extends View {
     protected void onDraw(Canvas canvas) {
         for (Point p : circlePoints) {
             canvas.drawCircle(p.x, p.y, 20, paint);
+            imageHeight = canvas.getHeight();
+            imageWidth = canvas.getWidth();
         }
     }
 
@@ -43,6 +47,7 @@ public class TrajDrawingView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 circlePoints.add(new Point(Math.round(eventX), Math.round(eventY)));
+                System.out.println("Point:" + eventX + " - " + eventY);
                 break;
         }
         postInvalidate();

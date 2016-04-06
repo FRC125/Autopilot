@@ -66,9 +66,17 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
         double kWheelbaseWidth = intent.getDoubleExtra("kWheelbaseWidth", 0.0);
         double[] waypointArrayX = intent.getDoubleArrayExtra("waypointArrayX");
         double[] waypointArrayY = intent.getDoubleArrayExtra("waypointArrayY");
+        double kXPixelsPerFoot = intent.getDoubleExtra("kXPixelsPerFoot", 0.0);
+        double kYPixelsPerFoot = intent.getDoubleExtra("kYPixelsPerFoot", 0.0);
+        double imageHeight = intent.getDoubleExtra("imageHeight", 0.0);
 
         String pathName = "CustomTrajectory";
         String pathDescription = intent.getStringExtra("pathDescription");
+
+        for(int i = 0; i<waypointArrayX.length; i++){
+            waypointArrayX[i] = waypointArrayX[i]/kXPixelsPerFoot;
+            waypointArrayY[i] = (imageHeight - waypointArrayY[i])/kYPixelsPerFoot;
+        }
 
         for(int i = 0; i<waypointArrayX.length; i++){
             waypointArrayX[i] = waypointArrayX[i] - waypointArrayX[0];
@@ -76,7 +84,7 @@ public class TrajectoryGeneratorActivity extends AppCompatActivity {
         }
 
         for(int i = 0; i<waypointArrayX.length; i++){
-            System.out.println(waypointArrayX[i] + " - " + waypointArrayY[i]);
+            System.out.println("All points: " + waypointArrayX[i] + " - " + waypointArrayY[i]);
         }
 
         goHomeButton = (Button) findViewById(R.id.homeButton);

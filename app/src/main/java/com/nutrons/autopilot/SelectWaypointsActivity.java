@@ -41,15 +41,14 @@ public class SelectWaypointsActivity extends AppCompatActivity {
 
                 //field y=30 ft, x = 26.7 ft
 
-                final double kXPixelsPerFoot = trajView.imageWidth / 26.7;
-                final double kYPixelsPerFoot = (trajView.imageHeight - .14*trajView.imageHeight) / 30.0;
+                double kXPixelsPerFoot = trajView.imageWidth / 26.7;
+                double kYPixelsPerFoot = (trajView.imageHeight) / 30.0;
+                double imageHeight = trajView.imageHeight;
 
                 for (int i = 0; i < trajView.circlePoints.size(); i++) {
-                    waypointArrayX[i] = (trajView.circlePoints.get(i).x) / kXPixelsPerFoot;
-                    waypointArrayY[i] = (trajView.circlePoints.get(i).y) / kYPixelsPerFoot;
+                    waypointArrayX[i] = trajView.circlePoints.get(i).x;
+                    waypointArrayY[i] = trajView.circlePoints.get(i).y;
                 }
-
-                System.out.println(trajView.imageWidth  + " - " +  trajView.imageHeight);
 
                 intent.putExtra("MaxAccel", maxAccel);
                 intent.putExtra("MaxJerk", maxJerk);
@@ -58,6 +57,9 @@ public class SelectWaypointsActivity extends AppCompatActivity {
                 intent.putExtra("pathName", pathName);
                 intent.putExtra("waypointArrayX", waypointArrayX);
                 intent.putExtra("waypointArrayY", waypointArrayY);
+                intent.putExtra("kXPixelsPerFoot", kXPixelsPerFoot);
+                intent.putExtra("kYPixelsPerFoot", kYPixelsPerFoot);
+                intent.putExtra("imageHeight", imageHeight);
 
                 startActivity(intent);
             }

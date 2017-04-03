@@ -1,5 +1,12 @@
 package com.nutrons.autopilot.lib.trajectory;
 
+import com.nutrons.autopilot.lib.trajectory.io.TextFileSerializer;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * Generate a smooth Trajectory from a Path.
  *
@@ -8,6 +15,28 @@ package com.nutrons.autopilot.lib.trajectory;
  * @author Jared341
  */
 public class PathGenerator {
+  public static void main(String[] args) {
+    WaypointSequence waypoints = new WaypointSequence(2);
+    waypoints.addWaypoint(new WaypointSequence.Waypoint(0.0, 0.0, 0.0));
+    waypoints.addWaypoint(new WaypointSequence.Waypoint(5.0, 0.0, 0.0));
+    waypoints.addWaypoint(new WaypointSequence.Waypoint(5.0, 5.75, 85.0));
+    TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
+    config.dt = .01;
+    config.max_acc = 24.0;
+    config.max_jerk = 48.0;
+    config.max_vel = 14.0;
+
+    Path path = makePath(waypoints, config, 2.9, "curvedPath");
+    try {
+      File file = new File("C:\\Users\\Josh\\Documents\\Motion Profiles\\curvedPath.txt");
+      FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
+      BufferedWriter bw = new BufferedWriter(fileWriter);
+      TextFileSerializer js = new TextFileSerializer();
+      String serialized = js.serialize(path);
+      bw.write(serialized);
+      bw.close();
+    } catch (IOException e) {e.printStackTrace();}
+  }
   /**
    * Generate a path for autonomous driving. 
    * 

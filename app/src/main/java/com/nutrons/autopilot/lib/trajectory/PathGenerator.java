@@ -22,13 +22,13 @@ public class PathGenerator {
     waypoints.addWaypoint(new WaypointSequence.Waypoint(5.0, 5.75, 85.0));
     TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
     config.dt = .01;
-    config.max_acc = 24.0;
-    config.max_jerk = 48.0;
-    config.max_vel = 14.0;
+    config.max_acc = 24.0; // Max acceleration
+    config.max_jerk = 48.0; // Max jerk
+    config.max_vel = 14.0; // Max Velocity
 
-    Path path = makePath(waypoints, config, 2.9, "curvedPath");
+    Path path = makePath(waypoints, config, 2.9, "curvedPath"); // Wheelbase width then name of path are the last two params.
     try {
-      File file = new File("C:\\Users\\Josh\\Documents\\Motion Profiles\\curvedPath.txt");
+      File file = new File("C:\\Users\\Josh\\Documents\\Motion Profiles\\curvedPath.txt"); // Directory to write a motion profile to.
       FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
       BufferedWriter bw = new BufferedWriter(fileWriter);
       TextFileSerializer js = new TextFileSerializer();
